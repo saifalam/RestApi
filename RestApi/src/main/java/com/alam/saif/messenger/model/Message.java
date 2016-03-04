@@ -1,6 +1,7 @@
 package com.alam.saif.messenger.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +59,7 @@ public class Message {
         this.author = author;
     }
 
+    @XmlTransient
     public Map<Long, Comment> getComments() {
         return comments;
     }
