@@ -1,0 +1,17 @@
+target/
+*/.idea/artifacts/*
+*/.idea/workspace.xml
+*/.idea/task.xml
+*/.idea/dictionaries/*
+*/.idea/webContexts.xml
+*.iml
+*/.idea/inspectionProfiles/*.xml
+*/.idea/compiler.xml
+*/.idea/module.xml
+vcs.xml
+*/.idea/misc.xml
+*/.idea/libraries/*
+*/.idea/*
+*/.idea/dataSources.local.xml
+out/
+.idea/
