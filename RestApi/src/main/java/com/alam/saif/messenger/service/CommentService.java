@@ -1,11 +1,11 @@
 package com.alam.saif.messenger.service;
 
-import com.alam.saif.messenger.DataStorage.DataStorage;
+import com.alam.saif.messenger.dataStorage.DataStorage;
+import com.alam.saif.messenger.exceptionHandler.ResourceNotFound;
 import com.alam.saif.messenger.model.Comment;
 import com.alam.saif.messenger.model.Message;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +23,12 @@ public class CommentService {
 
     public Comment getComment(long messageId, long commentId) {
         Map<Long, Comment> comments = messages.get(messageId).getComments();
-        return comments.get(commentId);
+        Comment comment = comments.get(commentId);
+
+        if (comment == null) {
+            throw new ResourceNotFound("Comment id: " + commentId + " for Message id: "+ messageId+ " not found" );
+        }
+        return comment;
     }
 
     public Comment createComment(Comment comment, long messageId) {

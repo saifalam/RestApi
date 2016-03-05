@@ -1,4 +1,4 @@
-package com.alam.saif.messenger.DataStorage;
+package com.alam.saif.messenger.dataStorage;
 
 import com.alam.saif.messenger.model.Message;
 import com.alam.saif.messenger.model.Profile;

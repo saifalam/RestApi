@@ -1,6 +1,7 @@
 package com.alam.saif.messenger.service;
 
-import com.alam.saif.messenger.DataStorage.DataStorage;
+import com.alam.saif.messenger.dataStorage.DataStorage;
+import com.alam.saif.messenger.exceptionHandler.ResourceNotFound;
 import com.alam.saif.messenger.model.Message;
 
 import java.util.*;
@@ -22,11 +23,15 @@ public class MessageService {
     }
 
     public Message getMessageById(Long id) {
-        Message message = new Message();
+        Message message = null;
         for(Message temp : messages.values()) {
             if(id == temp.getId() ) {
                 message = temp;
             }
+        }
+
+        if (message == null) {
+            throw new ResourceNotFound("Message id: " + id + " not found" );
         }
         return message;
     }

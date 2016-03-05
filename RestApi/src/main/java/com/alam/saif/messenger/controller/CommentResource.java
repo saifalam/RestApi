@@ -53,7 +53,7 @@ public class CommentResource {
                        .build();
     }
 
-    @GET
+    @DELETE
     @Path("/{commentId}")
     public void deleteComment(@PathParam("messageId") long messageId,
                               @PathParam("commentId") long commentId) {

@@ -1,6 +1,7 @@
 package com.alam.saif.messenger.service;
 
-import com.alam.saif.messenger.DataStorage.DataStorage;
+import com.alam.saif.messenger.dataStorage.DataStorage;
+import com.alam.saif.messenger.exceptionHandler.ResourceNotFound;
 import com.alam.saif.messenger.model.Profile;
 
 import java.util.ArrayList;
@@ -47,12 +48,16 @@ public class ProfileService {
     }
 
     public Profile getProfileByName(String name) {
-        Profile profile = new Profile();
+        Profile profile = null;
 
         for(Profile temp : profiles.values()) {
             if(name.equals(temp.getProfileName())) {
                 profile = temp;
             }
+        }
+
+        if (profile == null) {
+            throw new ResourceNotFound("Profile name: " + name + " not found" );
         }
         return profile;
     }
