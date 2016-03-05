@@ -74,13 +74,15 @@ public class MessageResource {
      */
     @GET
     @Path("/{messageId}")
-    public Response getMessage(@PathParam("messageId")Long id) {
+    public Response getMessage(@PathParam("messageId")Long id, @Context UriInfo uriInfo) {
         Message message = messageService.getMessageById(id);
+        message.addLink(getUrlForSelf(uriInfo,message),"self");
+        message.addLink(getUrlForProfile(uriInfo, message),"profile");
+        message.addLink(getUrlForComments(uriInfo, message),"comments");
         return Response.status(Response.Status.OK)
                 .entity(message)
                 .build();
     }
-
 
     /**
      *
@@ -113,8 +115,44 @@ public class MessageResource {
     }
 
 
+    /*
+      Refer to the another resource basically sub resource
+     */
     @Path("/{messageId}/comments")
     public CommentResource getCommentResource() {
         return new CommentResource();
     }
+
+
+    //### Start To implement HATEOAS here all necessary links are generated using custom Link Class
+
+    private String getUrlForSelf(UriInfo uriInfo, Message message) {
+        URI uri = uriInfo.getBaseUriBuilder()
+                    .path(MessageResource.class)
+                    .path(Long.toString(message.getId()))
+                    .build();
+        return uri.toString();
+    }
+
+    private String getUrlForProfile(UriInfo uriInfo, Message message) {
+        URI uri = uriInfo.getBaseUriBuilder()
+                    .path(ProfileResource.class)
+                    .path(message.getAuthor())
+                    .build();
+        return uri.toString();
+    }
+
+    private String getUrlForComments(UriInfo uriInfo, Message message) {
+        URI uri = uriInfo.getBaseUriBuilder()
+                    .path(MessageResource.class)
+                    .path(MessageResource.class, "getCommentResource") //Refers to the sub-resource to get the path
+                    .path(CommentResource.class)
+                    .resolveTemplate("messageId", message.getId()) //used to take the runtime value of messageId
+                    .build();
+        return uri.toString();
+    }
+
+    // End To implement HATEOAS here all necessary links are generated using custom Link Class ###
+
+
 }
