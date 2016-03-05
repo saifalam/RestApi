@@ -1,6 +1,6 @@
 package com.alam.saif.messenger.controller;
 
-import com.alam.saif.messenger.controller.beans.MessageFilteringBean;
+import com.alam.saif.messenger.controller.beans.FilteringBean;
 import com.alam.saif.messenger.model.Message;
 import com.alam.saif.messenger.service.MessageService;
 import java.net.URI;
@@ -29,7 +29,7 @@ public class MessageResource {
      * @return List of Message that will be returned as a application/json response.
      */
     @GET
-    public List<Message> getMessages(@BeanParam MessageFilteringBean bean) {
+    public List<Message> getMessages(@BeanParam FilteringBean bean) {
 
         if(bean.getYear() > 0) {
             return messageService.getAllMessagesForYear(bean.getYear());
@@ -112,4 +112,9 @@ public class MessageResource {
 
     }
 
+
+    @Path("/{messageId}/comments")
+    public CommentResource getCommentResource() {
+        return new CommentResource();
+    }
 }

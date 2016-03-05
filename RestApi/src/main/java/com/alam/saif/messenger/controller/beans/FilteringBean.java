@@ -6,7 +6,7 @@ import javax.ws.rs.QueryParam;
 /**
  * Created by saif on 3/5/16.
  */
-public class MessageFilteringBean {
+public class FilteringBean {
     private @QueryParam("year") int year;
     private @QueryParam("start") int start;
     private @QueryParam("size") int size;

@@ -10,6 +10,7 @@ import java.util.Map;
  * Created by BS102-Saif on 3/4/2016.
  */
 public class DataStorage {
+
     private static Map<Long, Message> messages = new HashMap<>();
     private static Map<String, Profile> profiles = new HashMap<>();
 

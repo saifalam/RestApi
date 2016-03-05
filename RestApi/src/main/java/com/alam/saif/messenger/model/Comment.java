@@ -1,12 +1,10 @@
 package com.alam.saif.messenger.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * Created by BS102-Saif on 3/4/2016.
  */
-@XmlRootElement
 public class Comment {
     private long id;
     private String message;
