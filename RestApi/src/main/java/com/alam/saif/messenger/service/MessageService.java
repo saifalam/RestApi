@@ -2,8 +2,11 @@ package com.alam.saif.messenger.service;
 
 import com.alam.saif.messenger.dataStorage.DataStorage;
 import com.alam.saif.messenger.exceptionHandler.ResourceNotFound;
+import com.alam.saif.messenger.model.ErrorMessage;
 import com.alam.saif.messenger.model.Message;
 
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.Response;
 import java.util.*;
 
 /**
@@ -31,8 +34,16 @@ public class MessageService {
         }
 
         if (message == null) {
-            throw new ResourceNotFound("Message id: " + id + " not found" );
+            //throw new ResourceNotFound("Message id: " + id + " not found" );
+
+            /*NotFoundException is a subClass of WebApplicationException provided by JAX-RX
+              I do appreciate to use Custom ExceptionMapper to handle specific Exception
+            */
+            ErrorMessage errorMessage = new ErrorMessage("Message id " + id + " not found ...", 404);
+            Response response = Response.status(Response.Status.NOT_FOUND).entity(errorMessage).build();
+            throw new NotFoundException(response);
         }
+
         return message;
     }
 

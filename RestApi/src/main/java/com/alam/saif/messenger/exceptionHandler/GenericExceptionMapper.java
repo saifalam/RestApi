@@ -9,7 +9,8 @@ import javax.ws.rs.ext.Provider;
 /**
  * Created by saif on 3/6/16.
  */
-@Provider
+//@Provider
+// To use WebApplicationException provided by Jessy need to unregistar this from JAX-RX
 public class GenericExceptionMapper  implements ExceptionMapper<Throwable> {
     @Override
     public Response toResponse(Throwable ex) {

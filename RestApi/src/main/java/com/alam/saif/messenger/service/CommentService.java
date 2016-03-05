@@ -3,8 +3,12 @@ package com.alam.saif.messenger.service;
 import com.alam.saif.messenger.dataStorage.DataStorage;
 import com.alam.saif.messenger.exceptionHandler.ResourceNotFound;
 import com.alam.saif.messenger.model.Comment;
+import com.alam.saif.messenger.model.ErrorMessage;
 import com.alam.saif.messenger.model.Message;
 
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
